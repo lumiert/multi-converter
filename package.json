@@ -1,0 +1,15 @@
+{
+  "name": "multi-converter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Discord bot: audio converter (ffmpeg), later FL Studio/Ableton and downloader",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js",
+    "test": "node --test"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "discord.js": "14.16.3"
+  }
+}
