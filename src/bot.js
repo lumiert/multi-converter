@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config();
 const fs = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
@@ -34,7 +35,7 @@ async function handle(msg) {
 
 function main() {
   const token = process.env.DISCORD_TOKEN;
-  if (!token) throw new Error('Set DISCORD_TOKEN in the environment.');
+  if (!token) throw new Error('DISCORD_TOKEN não definido. Crie um arquivo .env na raiz do projeto com DISCORD_TOKEN=seu_token.');
   const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
   });
