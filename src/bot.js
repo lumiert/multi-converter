@@ -14,7 +14,7 @@ const {
 const { FORMATS, MAX_BYTES, convert } = require('./audio');
 const { YOUTUBE_FORMATS, isYouTubeUrl, downloadYouTube } = require('./youtube');
 
-const CHANNEL = process.env.AUDIO_CHANNEL || 'audio-converter';
+const CHANNEL = process.env.AUDIO_CHANNEL || 'downloader';
 const SELECTION_TTL = 15 * 60 * 1000;
 const pendingSelections = new Map();
 
