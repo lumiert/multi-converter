@@ -24,7 +24,7 @@ Create a `.env` file in the project root:
 
 ```env
 DISCORD_TOKEN=your_bot_token
-# Optional; defaults to audio-converter
+# Optional; defaults to downloader
 AUDIO_CHANNEL=audio-converter
 ```
 
