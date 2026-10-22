@@ -74,7 +74,7 @@ async function downloadYouTube(url, formatKey, directory) {
   ]);
 
   const files = await fs.readdir(directory);
-  const outputName = files.find((name) => path.extname(name).toLowerCase() === `.${format.extension}');
+  const outputName = files.find((name) => path.extname(name).toLowerCase() === `.${format.extension}`);
   if (!outputName) throw new Error('O yt-dlp terminou, mas não encontrei o arquivo convertido.');
   return path.join(directory, outputName);
 }
