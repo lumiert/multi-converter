@@ -1,24 +1,55 @@
 # multi-converter
 
-Roadmap: Discord audio converter (ffmpeg) → FL Studio ⇄ Ableton → downloader. Web UI (Vercel) later.
+Discord bot for converting uploaded audio files and YouTube links.
 
-## Audio converter bot (Discord)
-Requires Node 18+ and `ffmpeg` on PATH.
+## Requirements
 
-Create a `.env` file in the project root (it is git-ignored):
+- Node.js 18+
+- FFmpeg available on `PATH`
+- yt-dlp available on `PATH` (for YouTube links only)
 
+On Ubuntu/Debian, install FFmpeg and yt-dlp. The yt-dlp version from the OS repository may be outdated; use the official yt-dlp installation instructions if YouTube changes break downloads.
+
+```bash
+sudo apt update
+sudo apt install -y ffmpeg
+python3 -m pip install --user -U yt-dlp
 ```
+
+Ensure the user running Node can execute `yt-dlp --version` and `ffmpeg -version`. If `pip` reports an externally-managed-environment error, use the official yt-dlp standalone binary or pipx instead of forcing a system-wide pip install.
+
+## Setup
+
+Create a `.env` file in the project root:
+
+```env
 DISCORD_TOKEN=your_bot_token
+# Optional; defaults to downloader
+AUDIO_CHANNEL=audio-converter
 ```
 
-Then install and run, no extra parameters needed:
+Then install and run:
 
-```
+```bash
 npm install
 npm start
 ```
-If `DISCORD_TOKEN` is missing, the bot exits with an error message.
 
-In the `#audio-converter` channel (override with `AUDIO_CHANNEL`), upload an audio file and choose the output format from the menu (mp3, wav, flac, ogg, aac, m4a, opus). Enable the Message Content intent for the bot.
+Enable the **Message Content Intent** in Discord Developer Portal → your application → Bot.
 
-Never commit the bot token. The token shared in the original issue is public and must be reset in the Discord developer portal.
+## Usage
+
+In the configured channel:
+
+- Upload an audio file to choose an output format (MP3, WAV, FLAC, OGG, AAC, M4A, or OPUS).
+- Send a YouTube video link to choose one of:
+  - MP3 — 320 kbps
+  - MP4 — 480p
+  - MP4 — 720p
+  - MP4 — 1080p
+
+Only the person who sent the link/file can use its selection menu. Menus expire after 15 minutes. The bot is configured to send files up to 25 MiB; outputs larger than that are rejected with a message.
+
+Use the bot only for content you own or are authorized to download, and comply with YouTube's terms and applicable copyright law.
+
+Never commit the bot token. If a token has been exposed, reset it in the Discord Developer Portal.
